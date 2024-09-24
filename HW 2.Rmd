@@ -1,0 +1,83 @@
+---
+title: "HW 2 Student"
+author: "Andy Ackerman"
+date: "10/17/2023"
+output: 
+  html_document:
+    number_sections: true
+---
+
+This homework is meant to illustrate the methods of classification algorithms as well as their potential pitfalls.  In class, we demonstrated K-Nearest-Neighbors using the `iris` dataset.  Today I will give you a different subset of this same data, and you will train a KNN classifier.  
+
+```{r, echo = FALSE}
+set.seed(123)
+library(class)
+
+df <- data(iris) 
+
+normal <-function(x) {
+  (x -min(x))/(max(x)-min(x))   
+}
+
+iris_norm <- as.data.frame(lapply(iris[,c(1,2,3,4)], normal))
+
+subset <- c(1:45, 58, 60:70, 82, 94, 110:150)
+iris_train <- iris_norm[subset,] 
+iris_test <- iris_norm[-subset,] 
+
+iris_target_category <- iris[subset,5]
+iris_test_category <- iris[-subset,5]
+
+
+```
+
+#
+Above, I have given you a training-testing partition.  Train the KNN with $K = 5$ on the training data and use this to classify the 50 test observations.  Once you have classified the test observations, create a contingency table -- like we did in class -- to evaluate which observations your algorithm is misclassifying.   
+
+```{r}
+set.seed(123)
+#STUDENT INPUT
+pred <- knn(train = iris_train, test = iris_test, cl = iris_target_category, k = 5)
+tab <- table(pred, iris_test_category)
+tab
+accuracy <- function(x){
+  sum(diag(x)/(sum(rowSums(x)))) * 100
+}
+accuracy(tab)
+iris_target_category
+iris_test_category
+```
+
+#
+
+Discuss your results.  If you have done this correctly, you should have a classification error rate that is roughly 20% higher than what we observed in class.  Why is this the case? In particular run a summary of the `iris_test_category` as well as `iris_target_category` and discuss how this plays a role in your answer.  
+
+*STUDENT INPUT* 
+The accuracy of 78% is much lower than the accuracy we observed in class, where only one misclassification occurred. 
+The higher error rate in this case can be attributed to the class imbalance between the training and test datasets.
+
+Specifcally, in the training set, the versicolor class is underrepresented compared to the other two classes, including virginica. 
+Conversely, in the test set, versicolor is the majority class. 
+
+This mismatch means that the classifier had limited versicolor datapoints during training, which affected its ability to accurately classify them in the test set. 
+Specifically, some versicolor instances were misclassified as virginica because the classifier had seen more virginica examples and may have associated similar feature patterns with the virginica class.
+This is significant as we discussed during class that the two classes, while separate, are still close enough to be misclsasified by an algorithm. This example highlights the importance of having similar data in both the training and testing splits
+
+
+Despite the class imbalance, the classifier still correctly classified 25 out of 36 versicolor instances, which indicates that it was able to learn distinguishing features of this class to some extent. 
+However, the misclassification of 11 versicolor instances as virginica highlights error higher rate compared to class.
+#
+
+Choice of $K$ can also influence this classifier.  Why would choosing $K = 6$ not be advisable for this data? 
+
+*STUDENT INPUT*
+Choosing k = 6 is not advisible for this data because using an even number for k increases the likelihood of ties in the majority voting process of the KNN algorithm. 
+When there is a tie, the classifier may have to choose randomly among the tied classes, introducing inconsistency and potentially reducing the accuracy of the predictions.
+Given this specific example, choosing k = 6 could cause a even higher error rate due to the existing misclassification issue between versicolor and virginica resulting from the difference in the splits used to train the algorithm.
+#
+
+Build a github repository to store your homework assignments.  Share the link in this file.  
+
+*STUDENT INPUT*
+
+https://github.com/yuan25j/hw2
