@@ -74,7 +74,7 @@ Choice of $K$ can also influence this classifier.  Why would choosing $K = 6$ no
 *STUDENT INPUT*
 Choosing k = 6 is not advisible for this data because using an even number for k increases the likelihood of ties in the majority voting process of the KNN algorithm. 
 When there is a tie, the classifier may have to choose randomly among the tied classes, introducing inconsistency and potentially reducing the accuracy of the predictions.
-Given this specific example, choosing k = 6 could cause a even higher error rate due to the existing misclassification issue between versicolor and virginica resulting from the difference in the splits used to train the algorithm.
+Given this specific example, choosing k = 6 could cause a even higher error rate due to the existing misclassification issue and the fact that 6 is divisible by the number of classes.
 #
 
 Build a github repository to store your homework assignments.  Share the link in this file.  
