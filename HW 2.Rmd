@@ -56,8 +56,9 @@ Discuss your results.  If you have done this correctly, you should have a classi
 The accuracy of 78% is much lower than the accuracy we observed in class, where only one misclassification occurred. 
 The higher error rate in this case can be attributed to the class imbalance between the training and test datasets.
 
-Specifcally, in the training set, the versicolor class is underrepresented compared to the other two classes, including virginica. 
+Specifcally, in the training set, the versicolor class is underrepresented compared to the other two classes, including virginica.
 Conversely, in the test set, versicolor is the majority class. 
+I have added the contents of iris_target_category and iris_test_category as a quick visual check to the bottom of this file.
 
 This mismatch means that the classifier had limited versicolor datapoints during training, which affected its ability to accurately classify them in the test set. 
 Specifically, some versicolor instances were misclassified as virginica because the classifier had seen more virginica examples and may have associated similar feature patterns with the virginica class.
@@ -81,3 +82,40 @@ Build a github repository to store your homework assignments.  Share the link in
 *STUDENT INPUT*
 
 https://github.com/yuan25j/hw2
+
+
+
+
+
+Outputs:
+> iris_target_category
+  [1] setosa     setosa     setosa     setosa     setosa     setosa    
+  [7] setosa     setosa     setosa     setosa     setosa     setosa
+ [13] setosa     setosa     setosa     setosa     setosa     setosa
+ [19] setosa     setosa     setosa     setosa     setosa     setosa
+ [25] setosa     setosa     setosa     setosa     setosa     setosa
+ [31] setosa     setosa     setosa     setosa     setosa     setosa    
+ [37] setosa     setosa     setosa     setosa     setosa     setosa
+ [43] setosa     setosa     setosa     versicolor versicolor versicolor
+ [49] versicolor versicolor versicolor versicolor versicolor versicolor
+ [55] versicolor versicolor versicolor versicolor versicolor virginica
+ [61] virginica  virginica  virginica  virginica  virginica  virginica
+ [67] virginica  virginica  virginica  virginica  virginica  virginica
+ [73] virginica  virginica  virginica  virginica  virginica  virginica
+ [79] virginica  virginica  virginica  virginica  virginica  virginica
+ [85] virginica  virginica  virginica  virginica  virginica  virginica
+ [91] virginica  virginica  virginica  virginica  virginica  virginica
+ [97] virginica  virginica  virginica  virginica
+Levels: setosa versicolor virginica
+> iris_test_category
+ [1] setosa     setosa     setosa     setosa     setosa     versicolor
+ [7] versicolor versicolor versicolor versicolor versicolor versicolor
+[13] versicolor versicolor versicolor versicolor versicolor versicolor
+[19] versicolor versicolor versicolor versicolor versicolor versicolor
+[25] versicolor versicolor versicolor versicolor versicolor versicolor
+[31] versicolor versicolor versicolor versicolor versicolor versicolor
+[37] versicolor versicolor versicolor versicolor versicolor virginica
+[43] virginica  virginica  virginica  virginica  virginica  virginica
+[49] virginica  virginica
+Levels: setosa versicolor virginica
+> 
